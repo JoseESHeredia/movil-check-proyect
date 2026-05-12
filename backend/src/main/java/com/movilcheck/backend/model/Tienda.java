@@ -3,26 +3,24 @@ package com.movilcheck.backend.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Tiendas")
+@Table(name = "tiendas")
 public class Tienda {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_tienda;
-
-    private String nombre; // Ej: "Claro", "Entel"
-    private String url_web; 
-    private boolean activo; // Para "quitar" de la vista sin borrar el historial
+    private Long idTienda;
+    private String nombre;
+    private String urlWeb;
+    private boolean activo;
 
     public Tienda() {}
 
     // Getters y Setters
-    public Long getId() { return id_tienda; }
-    public void setId(Long id) { this.id_tienda = id; }
+    public Long getIdTienda() { return idTienda; }
+    public void setIdTienda(Long idTienda) { this.idTienda = idTienda; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getUrl_web() { return url_web; }
-    public void setUrl_web(String url_web) { this.url_web = url_web; }
+    public String getUrlWeb() { return urlWeb; }
+    public void setUrlWeb(String urlWeb) { this.urlWeb = urlWeb; }
     public boolean isActivo() { return activo; }
     public void setActivo(boolean activo) { this.activo = activo; }
 }
