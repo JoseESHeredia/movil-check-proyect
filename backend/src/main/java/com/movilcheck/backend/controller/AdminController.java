@@ -4,7 +4,6 @@ import com.movilcheck.backend.model.Tienda;
 import com.movilcheck.backend.repository.TiendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,25 +13,22 @@ public class AdminController {
     @Autowired
     private TiendaRepository tiendaRepo;
 
-    // LISTAR: Obtener todas las empresas
+    // LISTAR EMPRESAS
     @GetMapping("/tiendas")
-    public List<Tienda> listarTiendas() {
+    public List<Tienda> listar() {
         return tiendaRepo.findAll();
     }
 
-    // AGREGAR: Registrar una nueva empresa
+    // AGREGAR EMPRESA (Claro, Entel, etc.)
     @PostMapping("/tiendas")
-    public Tienda agregarTienda(@RequestBody Tienda nuevaTienda) {
-        nuevaTienda.setActivo(true);
-        return tiendaRepo.save(nuevaTienda);
+    public Tienda agregar(@RequestBody Tienda tienda) {
+        tienda.setActivo(true);
+        return tiendaRepo.save(tienda);
     }
 
-    // QUITAR/DESACTIVAR: Cambia el estado para que no aparezca en la web
-    @PutMapping("/tiendas/{id}/desactivar")
-    public String desactivarTienda(@PathVariable Long id) {
-        Tienda t = tiendaRepo.findById(id).orElseThrow();
-        t.setActivo(false);
-        tiendaRepo.save(t);
-        return "La empresa ha sido desactivada del monitoreo.";
+    // QUITAR/ELIMINAR EMPRESA
+    @DeleteMapping("/tiendas/{id}")
+    public void eliminar(@PathVariable Long id) {
+        tiendaRepo.deleteById(id);
     }
 }
